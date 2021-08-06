@@ -1,0 +1,12 @@
+C:\C#\Bloom\bin\Debug\netcoreapp2.1\Bloom.deps.json
+C:\C#\Bloom\bin\Debug\netcoreapp2.1\Bloom.runtimeconfig.json
+C:\C#\Bloom\bin\Debug\netcoreapp2.1\Bloom.runtimeconfig.dev.json
+C:\C#\Bloom\bin\Debug\netcoreapp2.1\Bloom.dll
+C:\C#\Bloom\bin\Debug\netcoreapp2.1\Bloom.pdb
+C:\C#\Bloom\obj\Debug\netcoreapp2.1\Bloom.csproj.AssemblyReference.cache
+C:\C#\Bloom\obj\Debug\netcoreapp2.1\Bloom.AssemblyInfoInputs.cache
+C:\C#\Bloom\obj\Debug\netcoreapp2.1\Bloom.AssemblyInfo.cs
+C:\C#\Bloom\obj\Debug\netcoreapp2.1\Bloom.csproj.CoreCompileInputs.cache
+C:\C#\Bloom\obj\Debug\netcoreapp2.1\Bloom.dll
+C:\C#\Bloom\obj\Debug\netcoreapp2.1\Bloom.pdb
+C:\C#\Bloom\obj\Debug\netcoreapp2.1\Bloom.genruntimeconfig.cache

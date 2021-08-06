@@ -10,8 +10,6 @@ C:\C#\Bloom\bin\Debug\net5.0\Discord.Net.Core.dll
 C:\C#\Bloom\bin\Debug\net5.0\Discord.Net.Rest.dll
 C:\C#\Bloom\bin\Debug\net5.0\Discord.Net.Webhook.dll
 C:\C#\Bloom\bin\Debug\net5.0\Discord.Net.WebSocket.dll
-C:\C#\Bloom\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
-C:\C#\Bloom\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\C#\Bloom\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\C#\Bloom\bin\Debug\net5.0\System.Interactive.Async.dll
 C:\C#\Bloom\obj\Debug\net5.0\Bloom.csproj.AssemblyReference.cache
@@ -24,3 +22,4 @@ C:\C#\Bloom\obj\Debug\net5.0\Bloom.dll
 C:\C#\Bloom\obj\Debug\net5.0\ref\Bloom.dll
 C:\C#\Bloom\obj\Debug\net5.0\Bloom.pdb
 C:\C#\Bloom\obj\Debug\net5.0\Bloom.genruntimeconfig.cache
+C:\C#\Bloom\bin\Debug\net5.0\System.Linq.Async.dll
