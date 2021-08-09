@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "9JgDJjdP0rmfvUQfpKVHkzc0V5LO3omwitfL4tTGz0BLa1xd3CBJLcruiSCZq7nZg+PI3syBr59ScLoWElTRuQ==",
+  "dgSpecHash": "CnyWScUgXD+xrp8VxonTVIufAO/qHPuB3RZ12Hp466bk0GPqDSXvXzTagPUapElnuaOehIwOgaVZwBlY4zQ+ug==",
   "success": true,
   "projectFilePath": "C:\\C#\\Bloom\\Bloom.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,8 @@
     "C:\\Users\\user\\.nuget\\packages\\discord.net.rest\\2.4.0\\discord.net.rest.2.4.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\discord.net.webhook\\2.4.0\\discord.net.webhook.2.4.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\discord.net.websocket\\2.4.0\\discord.net.websocket.2.4.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\3.1.0\\microsoft.extensions.dependencyinjection.3.1.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.1.0\\microsoft.extensions.dependencyinjection.abstractions.3.1.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",

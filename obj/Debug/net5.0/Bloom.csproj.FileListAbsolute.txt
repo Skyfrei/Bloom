@@ -23,3 +23,5 @@ C:\C#\Bloom\obj\Debug\net5.0\ref\Bloom.dll
 C:\C#\Bloom\obj\Debug\net5.0\Bloom.pdb
 C:\C#\Bloom\obj\Debug\net5.0\Bloom.genruntimeconfig.cache
 C:\C#\Bloom\bin\Debug\net5.0\System.Linq.Async.dll
+C:\C#\Bloom\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+C:\C#\Bloom\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
