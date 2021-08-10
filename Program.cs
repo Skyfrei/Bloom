@@ -25,7 +25,7 @@ namespace _02_commands_framework
                 client.Log += LogAsync;
                 services.GetRequiredService<CommandService>().Log += LogAsync;
 
-                await client.LoginAsync(TokenType.Bot, File.ReadAllText("Token.txt"));
+                await client.LoginAsync(TokenType.Bot, File.ReadAllText("token.txt"));
                 await client.StartAsync();
 
                 await services.GetRequiredService<CommandHandlingService>().InitializeAsync();
