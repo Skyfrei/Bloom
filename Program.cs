@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Discord;
@@ -24,7 +25,7 @@ namespace _02_commands_framework
                 client.Log += LogAsync;
                 services.GetRequiredService<CommandService>().Log += LogAsync;
 
-                await client.LoginAsync(TokenType.Bot, "ODcyNzY2OTMyMzk3NDg2MTUw.YQupiw.5NasIh63nbNasF5Kq2vwea8YFKY");
+                await client.LoginAsync(TokenType.Bot, File.ReadAllText("Token.txt"));
                 await client.StartAsync();
 
                 await services.GetRequiredService<CommandHandlingService>().InitializeAsync();
