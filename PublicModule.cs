@@ -1,7 +1,12 @@
 using System.IO;
 using System.Threading.Tasks;
+using System;
 using Discord;
 using Discord.Commands;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using _02_commands_framework.Services;
 
 namespace _02_commands_framework.Modules
@@ -69,5 +74,26 @@ namespace _02_commands_framework.Modules
         // [Command("randomDeck")]
         // [Alias("")]
 
+    }
+    public class LeagueOfLegends : ModuleBase<SocketCommandContext>
+    {
+        JObject data = JObject.Parse(File.ReadAllText("champions.json"));
+        [Command("build")]
+        [Alias("herobuild", "champbuild")]
+
+        public async Task ChampionBuildAsync(string champion = null)
+        {   
+            try
+            {
+                champion = char.ToUpper(champion[0]) + champion.Substring(1);
+                if ($"{data["data"][champion]["name"]}".ToString().ToLower() == champion.ToLower())
+                    await ReplyAsync($"https://u.gg/lol/champions/{champion}/build");
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+                await ReplyAsync("Champion doesn't exist.");
+            }
+        }
     }
 }
