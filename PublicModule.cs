@@ -3,9 +3,6 @@ using System.Threading.Tasks;
 using System;
 using Discord;
 using Discord.Commands;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using _02_commands_framework.Services;
 
@@ -83,11 +80,22 @@ namespace _02_commands_framework.Modules
 
         public async Task ChampionBuildAsync(string champion = null)
         {   
+            champion = char.ToUpper(champion[0]) + champion.Substring(1);
+            var embed = new EmbedBuilder()
+            {
+                Color = Color.Blue,
+                Description = $"{champion} builds and statistics.",
+                Title = champion,
+                Url = $"https://u.gg/lol/champions/{champion}/build",
+                ThumbnailUrl = $"https://static.u.gg/assets/lol/riot_static/11.15.1/img/champion/{champion}.png",
+                Timestamp = DateTime.UtcNow,
+                
+            };
+
             try
             {
-                champion = char.ToUpper(champion[0]) + champion.Substring(1);
                 if ($"{data["data"][champion]["name"]}".ToString().ToLower() == champion.ToLower())
-                    await ReplyAsync($"https://u.gg/lol/champions/{champion}/build");
+                    await ReplyAsync("", false, embed.Build());
             }
             catch(Exception e)
             {
