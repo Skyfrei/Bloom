@@ -1,9 +1,7 @@
 using System.IO;
 using System.Threading.Tasks;
-using System;
 using Discord;
 using Discord.Commands;
-using Newtonsoft.Json.Linq;
 using _02_commands_framework.Services;
 
 namespace _02_commands_framework.Modules
@@ -25,6 +23,13 @@ namespace _02_commands_framework.Modules
             await Context.Channel.SendFileAsync(stream, "cat.png");
         }
 
+        [Command("commands")]
+        [Alias("command")]
+        public async Task Commands()
+        {
+            await ReplyAsync(File.ReadAllText("botcommands.txt"));
+        }
+
         [Command("userinfo")]
         public async Task UserInfoAsync(IUser user = null)
         {
@@ -33,8 +38,8 @@ namespace _02_commands_framework.Modules
             await ReplyAsync(user.ToString());
         }
 
-        [Command("about")]
-        [Alias("info", "donate")]
+        [Command("bloom")]
+        [Alias("Bloom", "donate")]
         public async Task BotInfo()
         {
             var description = "My name is Bloom and I am an ongoing project and slave to my creator. According to him I will currently be a multi-purpose human mainly used to handle server decisions and help with video games. My creator needs money so he doesn't live on the streets, he's a c-word sometimes and works hard to finish me everyday :wink:\n\n If you think you want to support me you should donate to my creator on the following link.\n Paypal: \t\thttps://www.paypal.com/paypalme/Klavio";
@@ -63,45 +68,5 @@ namespace _02_commands_framework.Modules
         [RequireContext(ContextType.Guild, ErrorMessage = "Sorry, this command must be ran from within a server, not a DM!")]
         public Task GuildOnlyCommand()
             => ReplyAsync("Nothing to see here!");
-    }
-
-    [Group("rune")]
-    public class RuneTerra : ModuleBase<SocketCommandContext>
-    {
-        // [Command("randomDeck")]
-        // [Alias("")]
-
-    }
-    public class LeagueOfLegends : ModuleBase<SocketCommandContext>
-    {
-        JObject data = JObject.Parse(File.ReadAllText("champions.json"));
-        [Command("build")]
-        [Alias("herobuild", "champbuild")]
-
-        public async Task ChampionBuildAsync(string champion = null)
-        {   
-            champion = char.ToUpper(champion[0]) + champion.Substring(1);
-            var embed = new EmbedBuilder()
-            {
-                Color = Color.Blue,
-                Description = $"{champion} builds and statistics.",
-                Title = champion,
-                Url = $"https://u.gg/lol/champions/{champion}/build",
-                ThumbnailUrl = $"https://static.u.gg/assets/lol/riot_static/11.15.1/img/champion/{champion}.png",
-                Timestamp = DateTime.UtcNow,
-                
-            };
-
-            try
-            {
-                if ($"{data["data"][champion]["name"]}".ToString().ToLower() == champion.ToLower())
-                    await ReplyAsync("", false, embed.Build());
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e);
-                await ReplyAsync("Champion doesn't exist.");
-            }
-        }
     }
 }
