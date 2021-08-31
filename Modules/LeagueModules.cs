@@ -63,7 +63,7 @@ namespace _02_commands_framework.Services
         public async Task Profile(string profile = null)
         {
             
-            await ReplyAsync("asdas");
+            
         }
     }
 }
