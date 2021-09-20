@@ -47,6 +47,10 @@
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
               "version": "[3.1.0, )"
+            },
+            "System.Data.SQLite": {
+              "target": "Package",
+              "version": "[1.0.115, )"
             }
           },
           "imports": [

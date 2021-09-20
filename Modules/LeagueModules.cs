@@ -4,6 +4,7 @@ using System;
 using Discord;
 using Discord.Commands;
 using Newtonsoft.Json.Linq;
+using System.Data.SQLite;
 
 namespace _02_commands_framework.Services
 {
@@ -44,7 +45,7 @@ namespace _02_commands_framework.Services
                         .WithIconUrl($"{user.GetAvatarUrl()}")
             };
             embed.AddField("Runes", $"https://u.gg/lol/champions/{champion}/runes", true);
-            embed.AddField("Summoner Spells", $"https://u.gg/lol/champions/{champion}/runes", true);
+            embed.AddField("Items", $"https://u.gg/lol/champions/{champion}/items", true);
 
             try
             {
@@ -57,13 +58,84 @@ namespace _02_commands_framework.Services
                 await ReplyAsync("Champion doesn't exist.");
             }
         }
-
-        [Command("profile")]
-        [Alias("me", "aboutme")]
-        public async Task Profile(string profile = null)
+        [Command("register")]
+        [Alias("addProfile")]
+        public async Task AddProfile(string profileName, string server, IUser user = null)
         {
-            
-            
+            user = user ?? Context.User;
+
+            SQLiteConnection conn = new SQLiteConnection("Data Source= database.db; Version=3; New=True; Compress=True;");
+            try
+            {
+                conn.Open();
+                string readString = "";
+
+                SQLiteCommand command = new SQLiteCommand();
+                command = conn.CreateCommand();
+                command.CommandText = $"SELECT Region FROM Regions WHERE Region = '{server}'";
+                SQLiteDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    readString = reader.GetString(0);
+                }
+                command = conn.CreateCommand();
+                command.CommandText = $"INSERT INTO Users (Id, Summ_name, Date_added, Region) VALUES ('{user.Id}', '{profileName}', '{DateTime.UtcNow}', '{readString}')";
+                command.ExecuteNonQuery();
+                await ReplyAsync("Account added");
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+                await ReplyAsync($"{user.Username} has already linked an account.");
+            }
+
+        }
+        [Command("profile")]
+        [Alias("aboutMe", "me")]
+        public async Task ShowProfile(IUser user = null)
+        {
+            user = user ?? Context.User;
+            string summonerName = "";
+            string summRegion = "";
+
+            SQLiteConnection conn = new SQLiteConnection("Data Source= database.db; Version=3; New=True; Compress=True;");
+            try
+            {
+                conn.Open();
+                SQLiteCommand command = new SQLiteCommand();
+                command = conn.CreateCommand();
+                command.CommandText = $"SELECT Summ_name, Region FROM Users WHERE Id = '{user.Id}'";
+                
+                SQLiteDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    summonerName = reader["Summ_name"].ToString(); 
+                    summRegion = reader["Region"].ToString();  
+                }
+                summonerName = summonerName.Replace(" ", "");
+                var embed = new EmbedBuilder()
+                {
+                    Color = Color.Orange,
+                    Description = $"{user.Username} profile.",
+                    Title = summonerName,
+                    Timestamp = DateTime.UtcNow,
+                    Footer = new EmbedFooterBuilder()
+                            .WithText($"{user.Username}")
+                            .WithIconUrl($"{user.GetAvatarUrl()}")
+                };
+                embed.AddField("Profile", $"https://u.gg/lol/profile/{summRegion}1/{summonerName}", true);
+                await ReplyAsync("", false, embed.Build());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        public async Task DeleteProfile(IUser user = null)
+        {
+
         }
     }
 }
