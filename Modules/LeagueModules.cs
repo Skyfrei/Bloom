@@ -95,10 +95,12 @@ namespace _02_commands_framework.Services
         [Alias("aboutMe", "me")]
         public async Task ShowProfile(IUser user = null)
         {
+            
             user = user ?? Context.User;
             string summonerName = "";
             string summRegion = "";
 
+               
             SQLiteConnection conn = new SQLiteConnection("Data Source= database.db; Version=3; New=True; Compress=True;");
             try
             {
@@ -113,18 +115,22 @@ namespace _02_commands_framework.Services
                     summonerName = reader["Summ_name"].ToString(); 
                     summRegion = reader["Region"].ToString();  
                 }
+                
+                if (summonerName == "" || summonerName == null ) throw new ArgumentException((await ReplyAsync("You don't have an account. Type !register [accountName] [region] to create one.")).ToString());
+                        
                 summonerName = summonerName.Replace(" ", "");
                 var embed = new EmbedBuilder()
                 {
                     Color = Color.Orange,
-                    Description = $"{user.Username} profile.",
                     Title = summonerName,
+                    Url = $"https://u.gg/lol/profile/{summRegion}1/{summonerName}",
                     Timestamp = DateTime.UtcNow,
                     Footer = new EmbedFooterBuilder()
                             .WithText($"{user.Username}")
                             .WithIconUrl($"{user.GetAvatarUrl()}")
                 };
-                embed.AddField("Profile", $"https://u.gg/lol/profile/{summRegion}1/{summonerName}", true);
+                embed.AddField("Live Game", $"[Link](https://u.gg/lol/profile/{summRegion}1/{summonerName}/live-game)", true);
+                embed.AddField("Champion Stats", $"[Link](https://u.gg/lol/profile/{summRegion}1/{summonerName}/champion-stats)", true);
                 await ReplyAsync("", false, embed.Build());
             }
             catch (Exception e)
@@ -133,9 +139,25 @@ namespace _02_commands_framework.Services
             }
         }
 
+        [Command("deleteProfile")]
         public async Task DeleteProfile(IUser user = null)
         {
+            user = user ?? Context.User;
+            
+            SQLiteConnection conn = new SQLiteConnection("Data Source= database.db; Version=3; New=True; Compress=True;");
+            try
+            {
+                conn.Open();
+                SQLiteCommand command = new SQLiteCommand();
+                command = conn.CreateCommand();
+                command.CommandText = $"DELETE FROM Users WHERE Id = '{user.Id}'";
+                command.ExecuteNonQuery();
+                await ReplyAsync("Done");
+            }
+            catch(Exception e)
+            {
 
+            }
         }
     }
 }
