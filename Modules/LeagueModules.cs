@@ -117,7 +117,7 @@ namespace _02_commands_framework.Services
                 }
                 if (summonerName == "" || summonerName == null ) throw new ArgumentException((await ReplyAsync("You don't have an account. Type !register [accountName] [region] to create one.")).ToString());
                 
-                JObject responseString = JObject.Parse((await client.GetStringAsync($"https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summonerName}?api_key={apiKey}")));
+                JObject responseString = JObject.Parse((await client.GetStringAsync($"https://{summRegion}1.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summonerName}?api_key={apiKey}")));
 
                 summonerName = summonerName.Replace(" ", "");
                 var embed = new EmbedBuilder()
