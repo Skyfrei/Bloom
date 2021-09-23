@@ -115,7 +115,7 @@ namespace _02_commands_framework.Services
                     summonerName = reader["Summ_name"].ToString(); 
                     summRegion = reader["Region"].ToString();  
                 }
-                if (summonerName == "" || summonerName == null ) throw new ArgumentException((await ReplyAsync("You don't have an account. Type !register [accountName] [region] to create one.")).ToString());
+                if (summonerName == "" || summonerName == null ) throw new ArgumentException((await ReplyAsync("You don't have an account. Type !register [accountName] [region] to create one.```!register MaxxBurn euw```")).ToString());
                 
                 JObject responseString = JObject.Parse((await client.GetStringAsync($"https://{summRegion}1.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summonerName}?api_key={apiKey}")));
 
@@ -143,6 +143,7 @@ namespace _02_commands_framework.Services
         }
 
         [Command("deleteProfile")]
+        [Alias("delete")]
         public async Task DeleteProfile(IUser user = null)
         {
             user = user ?? Context.User;
@@ -159,7 +160,7 @@ namespace _02_commands_framework.Services
             }
             catch(Exception e)
             {
-
+                Console.WriteLine(e);
             }
         }
     }
