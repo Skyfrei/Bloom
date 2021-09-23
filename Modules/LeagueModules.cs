@@ -12,7 +12,7 @@ namespace _02_commands_framework.Services
     public class LeagueOfLegends : ModuleBase<SocketCommandContext>
     {
         private static readonly HttpClient client = new HttpClient();
-        private readonly string apiKey = "RGAPI-432b8705-42f9-4628-b61a-2475b6f6a33e";
+        private readonly string apiKey = File.ReadAllText("Data Dragon/ApiToken.txt");
         JObject data = JObject.Parse(File.ReadAllText("Data Dragon/champions.json"));
 
         [Command("build")]
