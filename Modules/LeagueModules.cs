@@ -5,17 +5,21 @@ using Discord;
 using Discord.Commands;
 using Newtonsoft.Json.Linq;
 using System.Data.SQLite;
+using System.Net.Http;
 
 namespace _02_commands_framework.Services
 {
     public class LeagueOfLegends : ModuleBase<SocketCommandContext>
     {
-        JObject data = JObject.Parse(File.ReadAllText("champions.json"));
+        private static readonly HttpClient client = new HttpClient();
+        private readonly string apiKey = "RGAPI-432b8705-42f9-4628-b61a-2475b6f6a33e";
+        JObject data = JObject.Parse(File.ReadAllText("Data Dragon/champions.json"));
 
         [Command("build")]
         [Alias("herobuild", "champbuild")]
         public async Task ChampionBuildAsync(string champion = null, IUser user = null)
         {  
+            user = user ?? Context.User;
             // Getting user that's typing the message 
             try 
             {
@@ -26,9 +30,6 @@ namespace _02_commands_framework.Services
                 await ReplyAsync("No champion selected.");
                 return;
             }
-            
-            user = user ?? Context.User;
-
             // Creating the embeded message. It makes the bot's message looky pretty when its posted on the channel
             // The error catching is used so the user understands that he wrote a wrong champion's name or the champion doesn't exist.
             // The champions name is formated so it matches the name of the champion in the json file. Capital letter on the first letter. 
@@ -100,7 +101,6 @@ namespace _02_commands_framework.Services
             string summonerName = "";
             string summRegion = "";
 
-               
             SQLiteConnection conn = new SQLiteConnection("Data Source= database.db; Version=3; New=True; Compress=True;");
             try
             {
@@ -115,15 +115,18 @@ namespace _02_commands_framework.Services
                     summonerName = reader["Summ_name"].ToString(); 
                     summRegion = reader["Region"].ToString();  
                 }
-                
                 if (summonerName == "" || summonerName == null ) throw new ArgumentException((await ReplyAsync("You don't have an account. Type !register [accountName] [region] to create one.")).ToString());
-                        
+                
+                JObject responseString = JObject.Parse((await client.GetStringAsync($"https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summonerName}?api_key={apiKey}")));
+
                 summonerName = summonerName.Replace(" ", "");
                 var embed = new EmbedBuilder()
                 {
                     Color = Color.Orange,
                     Title = summonerName,
+                    ThumbnailUrl = $"https://ddragon.leagueoflegends.com/cdn/11.19.1/img/profileicon/{responseString["profileIconId"]}.png",
                     Url = $"https://u.gg/lol/profile/{summRegion}1/{summonerName}",
+                    
                     Timestamp = DateTime.UtcNow,
                     Footer = new EmbedFooterBuilder()
                             .WithText($"{user.Username}")
