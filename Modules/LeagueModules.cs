@@ -64,6 +64,7 @@ namespace _02_commands_framework.Services
         [Alias("addProfile")]
         public async Task AddProfile(string profileName, string server, IUser user = null)
         {
+            // Getting Discord user ID so it shows their league of legends profile
             user = user ?? Context.User;
             List<string> serverNames = new List<string>{"euw", "eun", "na", "br", "ru", "oce", "tr", "kr", "lan", "jp"};
             JObject responseString = new JObject(); 
@@ -171,6 +172,8 @@ namespace _02_commands_framework.Services
         {
             user = user ?? Context.User;
             
+            // Deleting the profile saved on the sqlite database
+
             SQLiteConnection conn = new SQLiteConnection("Data Source= database.db; Version=3; New=True; Compress=True;");
             try
             {
