@@ -20,8 +20,8 @@ namespace _02_commands_framework.Services
         [Alias("herobuild", "champbuild")]
         public async Task ChampionBuildAsync(string champion = null, IUser user = null)
         {  
+            // Getting Discord user ID so it shows their league of legends profile
             user = user ?? Context.User;
-            // Getting user that's typing the message 
             try 
             {
                 champion = char.ToUpper(champion[0]) + champion.Substring(1);
@@ -60,16 +60,16 @@ namespace _02_commands_framework.Services
                 await ReplyAsync("Champion doesn't exist.");
             }
         }
+
+        // Adding league accounts in SQLite if the server is correct
         [Command("register")]
         [Alias("addProfile")]
         public async Task AddProfile(string profileName, string server, IUser user = null)
         {
-            // Getting Discord user ID so it shows their league of legends profile
             user = user ?? Context.User;
             List<string> serverNames = new List<string>{"euw", "eun", "na", "br", "ru", "oce", "tr", "kr", "lan", "jp"};
             JObject responseString = new JObject(); 
 
-            // Adding league accounts in SQLite if the server is correct
             // Checking for server errors and printing out server list in a discord message if error is found
 
             SQLiteConnection conn = new SQLiteConnection("Data Source= database.db; Version=3; New=True; Compress=True;");
@@ -113,6 +113,8 @@ namespace _02_commands_framework.Services
             }
 
         }
+
+        // Showing user profile based on what he has registered on the database
         [Command("profile")]
         [Alias("aboutMe", "me")]
         public async Task ShowProfile(IUser user = null)
@@ -120,8 +122,6 @@ namespace _02_commands_framework.Services
             user = user ?? Context.User;
             string summonerName = "";
             string summRegion = "";
-
-            // Showing user profile based on what he has registered on the database
             // Getting equipped player image url
             // Sending embed message that holds player profile information
             // If summoner name is null or "" it means the user hasn't registered an account yet, and is informed of it
@@ -167,12 +167,13 @@ namespace _02_commands_framework.Services
             }
         }
 
+        // Deleting the profile saved on the sqlite database
         [Command("deleteProfile")]
         public async Task DeleteProfile(IUser user = null)
         {
             user = user ?? Context.User;
             
-            // Deleting the profile saved on the sqlite database
+            
 
             SQLiteConnection conn = new SQLiteConnection("Data Source= database.db; Version=3; New=True; Compress=True;");
             try
