@@ -68,6 +68,9 @@ namespace _02_commands_framework.Services
             List<string> serverNames = new List<string>{"euw", "eun", "na", "br", "ru", "oce", "tr", "kr", "lan", "jp"};
             JObject responseString = new JObject(); 
 
+            // Adding league accounts in SQLite if the server is correct
+            // Checking for server errors and printing out server list in a discord message if error is found
+
             SQLiteConnection conn = new SQLiteConnection("Data Source= database.db; Version=3; New=True; Compress=True;");
             try
             {
@@ -113,10 +116,14 @@ namespace _02_commands_framework.Services
         [Alias("aboutMe", "me")]
         public async Task ShowProfile(IUser user = null)
         {
-            
             user = user ?? Context.User;
             string summonerName = "";
             string summRegion = "";
+
+            // Showing user profile based on what he has registered on the database
+            // Getting equipped player image url
+            // Sending embed message that holds player profile information
+            // If summoner name is null or "" it means the user hasn't registered an account yet, and is informed of it
 
             SQLiteConnection conn = new SQLiteConnection("Data Source= database.db; Version=3; New=True; Compress=True;");
             try
