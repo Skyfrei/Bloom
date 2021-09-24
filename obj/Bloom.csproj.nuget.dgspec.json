@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\C#\\Bloom\\Bloom.csproj": {}
+    "C:\\Coding\\C#\\Bloom\\Bloom.csproj": {}
   },
   "projects": {
-    "C:\\C#\\Bloom\\Bloom.csproj": {
+    "C:\\Coding\\C#\\Bloom\\Bloom.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\C#\\Bloom\\Bloom.csproj",
+        "projectUniqueName": "C:\\Coding\\C#\\Bloom\\Bloom.csproj",
         "projectName": "Bloom",
-        "projectPath": "C:\\C#\\Bloom\\Bloom.csproj",
-        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\C#\\Bloom\\obj\\",
+        "projectPath": "C:\\Coding\\C#\\Bloom\\Bloom.csproj",
+        "packagesPath": "C:\\Users\\tarka\\.nuget\\packages\\",
+        "outputPath": "C:\\Coding\\C#\\Bloom\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tarka\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -44,6 +44,10 @@
               "target": "Package",
               "version": "[2.4.0, )"
             },
+            "Microsoft.Data.Sqlite": {
+              "target": "Package",
+              "version": "[5.0.10, )"
+            },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
               "version": "[3.1.0, )"
@@ -68,7 +72,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.207\\RuntimeIdentifierGraph.json"
         }
       }
     }

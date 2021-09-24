@@ -5,17 +5,21 @@ using Discord;
 using Discord.Commands;
 using Newtonsoft.Json.Linq;
 using System.Data.SQLite;
+using System.Net.Http;
 
 namespace _02_commands_framework.Services
 {
     public class LeagueOfLegends : ModuleBase<SocketCommandContext>
     {
-        JObject data = JObject.Parse(File.ReadAllText("champions.json"));
+        private static readonly HttpClient client = new HttpClient();
+        private readonly string apiKey = File.ReadAllText("Data Dragon/ApiToken.txt");
+        JObject data = JObject.Parse(File.ReadAllText("Data Dragon/champions.json"));
 
         [Command("build")]
         [Alias("herobuild", "champbuild")]
         public async Task ChampionBuildAsync(string champion = null, IUser user = null)
         {  
+            user = user ?? Context.User;
             // Getting user that's typing the message 
             try 
             {
@@ -26,9 +30,6 @@ namespace _02_commands_framework.Services
                 await ReplyAsync("No champion selected.");
                 return;
             }
-            
-            user = user ?? Context.User;
-
             // Creating the embeded message. It makes the bot's message looky pretty when its posted on the channel
             // The error catching is used so the user understands that he wrote a wrong champion's name or the champion doesn't exist.
             // The champions name is formated so it matches the name of the champion in the json file. Capital letter on the first letter. 
@@ -95,6 +96,7 @@ namespace _02_commands_framework.Services
         [Alias("aboutMe", "me")]
         public async Task ShowProfile(IUser user = null)
         {
+            
             user = user ?? Context.User;
             string summonerName = "";
             string summRegion = "";
@@ -113,18 +115,25 @@ namespace _02_commands_framework.Services
                     summonerName = reader["Summ_name"].ToString(); 
                     summRegion = reader["Region"].ToString();  
                 }
+                if (summonerName == "" || summonerName == null ) throw new ArgumentException((await ReplyAsync("You don't have an account. Type !register [accountName] [region] to create one.```!register MaxxBurn euw```")).ToString());
+                
+                JObject responseString = JObject.Parse((await client.GetStringAsync($"https://{summRegion}1.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summonerName}?api_key={apiKey}")));
+
                 summonerName = summonerName.Replace(" ", "");
                 var embed = new EmbedBuilder()
                 {
                     Color = Color.Orange,
-                    Description = $"{user.Username} profile.",
                     Title = summonerName,
+                    ThumbnailUrl = $"https://ddragon.leagueoflegends.com/cdn/11.19.1/img/profileicon/{responseString["profileIconId"]}.png",
+                    Url = $"https://u.gg/lol/profile/{summRegion}1/{summonerName}",
+                    
                     Timestamp = DateTime.UtcNow,
                     Footer = new EmbedFooterBuilder()
                             .WithText($"{user.Username}")
                             .WithIconUrl($"{user.GetAvatarUrl()}")
                 };
-                embed.AddField("Profile", $"https://u.gg/lol/profile/{summRegion}1/{summonerName}", true);
+                embed.AddField("Live Game", $"[Link](https://u.gg/lol/profile/{summRegion}1/{summonerName}/live-game)", true);
+                embed.AddField("Champion Stats", $"[Link](https://u.gg/lol/profile/{summRegion}1/{summonerName}/champion-stats)", true);
                 await ReplyAsync("", false, embed.Build());
             }
             catch (Exception e)
@@ -133,9 +142,26 @@ namespace _02_commands_framework.Services
             }
         }
 
+        [Command("deleteProfile")]
+        [Alias("delete")]
         public async Task DeleteProfile(IUser user = null)
         {
-
+            user = user ?? Context.User;
+            
+            SQLiteConnection conn = new SQLiteConnection("Data Source= database.db; Version=3; New=True; Compress=True;");
+            try
+            {
+                conn.Open();
+                SQLiteCommand command = new SQLiteCommand();
+                command = conn.CreateCommand();
+                command.CommandText = $"DELETE FROM Users WHERE Id = '{user.Id}'";
+                command.ExecuteNonQuery();
+                await ReplyAsync("Done");
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }
