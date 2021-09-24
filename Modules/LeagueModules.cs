@@ -6,6 +6,7 @@ using Discord.Commands;
 using Newtonsoft.Json.Linq;
 using System.Data.SQLite;
 using System.Net.Http;
+using System.Collections.Generic;
 
 namespace _02_commands_framework.Services
 {
@@ -64,8 +65,25 @@ namespace _02_commands_framework.Services
         public async Task AddProfile(string profileName, string server, IUser user = null)
         {
             user = user ?? Context.User;
+            List<string> serverNames = new List<string>{"euw", "eun", "na", "br", "ru", "oce", "tr", "kr", "lan", "jp"};
+            JObject responseString = new JObject(); 
 
             SQLiteConnection conn = new SQLiteConnection("Data Source= database.db; Version=3; New=True; Compress=True;");
+            try
+            {
+                responseString = JObject.Parse((await client.GetStringAsync($"https://{server}1.api.riotgames.com/lol/summoner/v4/summoners/by-name/{profileName}?api_key={apiKey}")));
+            }
+            catch
+            {
+                string message = "Enter a server from the list.```";
+                foreach(string ser in serverNames)
+                {
+                    message += $"{ser}\n";
+                }
+                message += "```";
+                await ReplyAsync(message);
+            }
+            
             try
             {
                 conn.Open();
@@ -81,7 +99,7 @@ namespace _02_commands_framework.Services
                     readString = reader.GetString(0);
                 }
                 command = conn.CreateCommand();
-                command.CommandText = $"INSERT INTO Users (Id, Summ_name, Date_added, Region) VALUES ('{user.Id}', '{profileName}', '{DateTime.UtcNow}', '{readString}')";
+                command.CommandText = $"INSERT INTO Users (Id, Summ_name, Date_added, Region, RiotId, Puuid) VALUES ('{user.Id}', '{profileName}', '{DateTime.UtcNow}', '{readString}', '{responseString["id"]}', '{responseString["puuid"]}')";
                 command.ExecuteNonQuery();
                 await ReplyAsync("Account added");
             }
@@ -118,7 +136,7 @@ namespace _02_commands_framework.Services
                 if (summonerName == "" || summonerName == null ) throw new ArgumentException((await ReplyAsync("You don't have an account. Type !register [accountName] [region] to create one.```!register MaxxBurn euw```")).ToString());
                 
                 JObject responseString = JObject.Parse((await client.GetStringAsync($"https://{summRegion}1.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summonerName}?api_key={apiKey}")));
-                Console.WriteLine(responseString);
+                
                 summonerName = summonerName.Replace(" ", "");
                 var embed = new EmbedBuilder()
                 {
