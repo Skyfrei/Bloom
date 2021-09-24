@@ -1,0 +1,20 @@
+**My command list**:
+```
+
+Public commands:
+
+!bloom - Get more information about me and my creator. 
+!cat - Get a random cat picture and be happy with it. 
+
+League of Legends commands:
+
+!build [Name of champion] - Gives details about the specified champion.
+!register [Account name] [server] - Registers your league account in Bloom.
+!profile - Shows your league of legends profile.
+!deleteProfile - Deletes your league of legends profile from Bloom.
+
+Legends of Runeterra commands:
+
+
+
+```

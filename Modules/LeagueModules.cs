@@ -103,9 +103,8 @@ namespace _02_commands_framework.Services
                 command.ExecuteNonQuery();
                 await ReplyAsync("Account added");
             }
-            catch(Exception e)
+            catch
             {
-                Console.WriteLine(e);
                 await ReplyAsync($"{user.Username} has already linked an account.");
             }
 
@@ -161,7 +160,6 @@ namespace _02_commands_framework.Services
         }
 
         [Command("deleteProfile")]
-        [Alias("delete")]
         public async Task DeleteProfile(IUser user = null)
         {
             user = user ?? Context.User;

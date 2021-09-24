@@ -1,6 +1,7 @@
 .vscode/
 .bin\\Debug/
 *.txt
+!botcommands.txt
 .obj/
 champions.json
 Data Dragon/
