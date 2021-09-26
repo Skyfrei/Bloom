@@ -122,6 +122,7 @@ namespace _02_commands_framework.Services
             user = user ?? Context.User;
             string summonerName = "";
             string summRegion = "";
+            
             // Getting equipped player image url
             // Sending embed message that holds player profile information
             // If summoner name is null or "" it means the user hasn't registered an account yet, and is informed of it
