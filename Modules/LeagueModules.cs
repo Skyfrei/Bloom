@@ -167,6 +167,9 @@ namespace _02_commands_framework.Services
                 };
                 embed.AddField("Live Game", $"[Link](https://u.gg/lol/profile/{summRegion}1/{summonerName}/live-game)", true);
                 embed.AddField("Champion Stats", $"[Link](https://u.gg/lol/profile/{summRegion}1/{summonerName}/champion-stats)", true);
+
+
+                //Get champion names here !!!!!!!!!!!!!!!!!
                 foreach(JObject champ in championMastery)
                 {
                     embed.AddField("Played Champion", $"[Link](https://ddragon.leagueoflegends.com/cdn/11.19.1/img/champion/{summonerName}.png)", true);
@@ -204,6 +207,7 @@ namespace _02_commands_framework.Services
         }
 
         //Gets weekly champion rotation when user enters !rotation
+        //Need to add multiple images here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         [Command("rotation")]
         public async Task ChampionRotation(IUser user = null)
         {
