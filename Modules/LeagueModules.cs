@@ -212,7 +212,7 @@ namespace _02_commands_framework.Services
         public async Task ChampionRotation(IUser user = null)
         {
             user = user ?? Context.User;
-            JObject rotationString = JObject.Parse(await client.GetStringAsync($"https://euw1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key=RGAPI-e83c0464-6978-46ae-b261-1506c7112dd8"));
+            JObject rotationString = JObject.Parse(await client.GetStringAsync($"https://euw1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key={apiKey}"));
 
             var embed = new EmbedBuilder()
             {
