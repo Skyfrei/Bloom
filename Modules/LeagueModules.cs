@@ -122,7 +122,8 @@ namespace _02_commands_framework.Services
             user = user ?? Context.User;
             string summonerName = "";
             string summRegion = "";
-            
+            string summonerId = "";
+            List<JObject> championMastery = new List<JObject>();
             // Getting equipped player image url
             // Sending embed message that holds player profile information
             // If summoner name is null or "" it means the user hasn't registered an account yet, and is informed of it
@@ -133,18 +134,24 @@ namespace _02_commands_framework.Services
                 conn.Open();
                 SQLiteCommand command = new SQLiteCommand();
                 command = conn.CreateCommand();
-                command.CommandText = $"SELECT Summ_name, Region FROM Users WHERE Id = '{user.Id}'";
+                command.CommandText = $"SELECT Summ_name, Region, RiotId FROM Users WHERE Id = '{user.Id}'";
                 
                 SQLiteDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
                     summonerName = reader["Summ_name"].ToString(); 
                     summRegion = reader["Region"].ToString();  
+                    summonerId = reader["RiotId"].ToString();
                 }
                 if (summonerName == "" || summonerName == null ) throw new ArgumentException((await ReplyAsync("You don't have an account. Type !register [accountName] [region] to create one.```!register MaxxBurn euw```")).ToString());
                 
                 JObject responseString = JObject.Parse((await client.GetStringAsync($"https://{summRegion}1.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summonerName}?api_key={apiKey}")));
-                
+                JArray championMasterArray = JArray.Parse((await client.GetStringAsync($"https://{summRegion}1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/{summonerId}?api_key={apiKey}")));
+                for (int i = 0; i < 3; i++)
+                {
+                    championMastery.Add(JObject.Parse(championMasterArray[i].ToString()));
+                }
+
                 summonerName = summonerName.Replace(" ", "");
                 var embed = new EmbedBuilder()
                 {
@@ -160,6 +167,10 @@ namespace _02_commands_framework.Services
                 };
                 embed.AddField("Live Game", $"[Link](https://u.gg/lol/profile/{summRegion}1/{summonerName}/live-game)", true);
                 embed.AddField("Champion Stats", $"[Link](https://u.gg/lol/profile/{summRegion}1/{summonerName}/champion-stats)", true);
+                foreach(JObject champ in championMastery)
+                {
+                    embed.AddField("Played Champion", $"[Link](https://ddragon.leagueoflegends.com/cdn/11.19.1/img/champion/{summonerName}.png)", true);
+                }
                 await ReplyAsync("", false, embed.Build());
             }
             catch (Exception e)
@@ -190,6 +201,27 @@ namespace _02_commands_framework.Services
             {
                 Console.WriteLine(e);
             }
+        }
+
+        //Gets weekly champion rotation when user enters !rotation
+        [Command("rotation")]
+        public async Task ChampionRotation(IUser user = null)
+        {
+            user = user ?? Context.User;
+            JObject rotationString = JObject.Parse(await client.GetStringAsync($"https://euw1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key=RGAPI-e83c0464-6978-46ae-b261-1506c7112dd8"));
+
+            var embed = new EmbedBuilder()
+            {
+                Color = Color.Green,
+                Title = "Champion Rotation",
+                Timestamp = DateTime.UtcNow,
+                Footer = new EmbedFooterBuilder()
+                        .WithText($"{user.Username}")
+                        .WithIconUrl($"{user.GetAvatarUrl()}")
+            };
+            embed.AddField("stuff", rotationString, true);
+
+            await ReplyAsync("", false, embed.Build());
         }
     }
 }
