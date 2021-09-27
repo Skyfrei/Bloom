@@ -6,11 +6,15 @@ Bloom is an ongoing project and has characteristic traits of a bot-slave. Bloom 
 
 # **Bloom's current functionalities:**
 
-  User can get champion specific informations such as builds and runes. 
-  User can register their own league of legends profile which will be used on the below command.
-  User can use commands to get information about their profile such as champion mastery, live game information, and champion stats.
-  There is a delete function which lets the user delete their league of legends account from the database. 
-  Command which shows all the currently available champions on rotation.
+   ・User can get champion specific informations such as builds and runes. 
+  
+   ・User can register their own league of legends profile which will be used on the below command.
+  
+   ・User can use commands to get information about their profile such as champion mastery, live game information, and champion stats.
+  
+   ・There is a delete function which lets the user delete their league of legends account from the database. 
+  
+   ・Command which shows all the currently available champions on rotation.
 
 # **Donations**
 
