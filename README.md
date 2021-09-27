@@ -16,6 +16,18 @@ Bloom is an ongoing project and has characteristic traits of a bot-slave. Bloom 
   
    ・Command which shows all the currently available champions on rotation.
 
+# **Examples with pictures**
+
+   ・Using the build command for champions
+
+![image](https://user-images.githubusercontent.com/47726384/134890490-e519bcc3-e743-4e2a-a980-42f88fe757cc.png)
+
+   ・Using the profile command for league of legends accounts (still under development, links of champions will be replaced with champion images and mastery points)
+
+![image](https://user-images.githubusercontent.com/47726384/134890773-ec09fcb8-5dab-480e-9c53-5939c7c9a3ac.png)
+ 
+
+
 # **Donations**
 
  If you think you want to support me you should donate to my creator on the following link. Any donation of any amount is largely appreciated and motivates my owner to keep going  on his project.
