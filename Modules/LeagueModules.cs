@@ -41,18 +41,18 @@ namespace _02_commands_framework.Services
                 Description = $"{champion} builds and statistics.",
                 Title = champion,
                 Url = $"https://u.gg/lol/champions/{champion}/build",
-                ThumbnailUrl = $"https://static.u.gg/assets/lol/riot_static/11.15.1/img/champion/{champion}.png",
+                ThumbnailUrl = $"https://static.u.gg/assets/lol/riot_static/11.19.1/img/champion/{champion}.png",
                 Timestamp = DateTime.UtcNow,
                 Footer = new EmbedFooterBuilder()
                         .WithText($"{user.Username}")
                         .WithIconUrl($"{user.GetAvatarUrl()}")
             };
-            embed.AddField("Runes", $"https://u.gg/lol/champions/{champion}/runes", true);
-            embed.AddField("Items", $"https://u.gg/lol/champions/{champion}/items", true);
+            embed.AddField("Runes", $"[Link](https://u.gg/lol/champions/{champion}/runes)", true);
+            embed.AddField("Items", $"[Link](https://u.gg/lol/champions/{champion}/items)", true);
 
             try
             {
-                if ($"{data["data"][champion]["name"]}".ToString().ToLower() == champion.ToLower())
+                if ($"{data["data"][champion]["id"]}".ToString().ToLower() == champion.ToLower())
                     await ReplyAsync("", false, embed.Build());
             }
             catch(Exception e)
@@ -112,7 +112,6 @@ namespace _02_commands_framework.Services
             {
                 await ReplyAsync($"{user.Username} has already linked an account.");
             }
-
         }
 
         // Showing user profile based on what he has registered on the database
@@ -144,7 +143,7 @@ namespace _02_commands_framework.Services
                     summRegion = reader["Region"].ToString();  
                     summonerId = reader["RiotId"].ToString();
                 }
-                if (summonerName == "" || summonerName == null ) throw new ArgumentException((await ReplyAsync("You don't have an account. Type !register [accountName] [region] to create one.```!register MaxxBurn euw```")).ToString());
+                if (summonerName == "" || summonerName == null ) throw new ArgumentException((await ReplyAsync("This user doesn't have an account. Type !register [accountName] [region] to create one.```!register MaxxBurn euw```")).ToString());
                 
                 JObject responseString = JObject.Parse((await client.GetStringAsync($"https://{summRegion}1.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summonerName}?api_key={apiKey}")));
                 JArray championMasterArray = JArray.Parse((await client.GetStringAsync($"https://{summRegion}1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/{summonerId}?api_key={apiKey}")));
@@ -188,8 +187,6 @@ namespace _02_commands_framework.Services
         public async Task DeleteProfile(IUser user = null)
         {
             user = user ?? Context.User;
-            
-            
 
             SQLiteConnection conn = new SQLiteConnection("Data Source= database.db; Version=3; New=True; Compress=True;");
             try
