@@ -143,7 +143,7 @@ namespace _02_commands_framework.Services
                     summRegion = reader["Region"].ToString();  
                     summonerId = reader["RiotId"].ToString();
                 }
-                if (summonerName == "" || summonerName == null ) throw new ArgumentException((await ReplyAsync("This user doesn't have an account. Type !register [accountName] [region] to create one.```!register MaxxBurn euw```")).ToString());
+                if (summonerName == "" || summonerName == null ) throw new ArgumentException((await ReplyAsync("This user doesn't have an account. Type !register [accountName] [region] to create one `!register MaxxBurn euw`")).ToString());
                 
                 JObject responseString = JObject.Parse((await client.GetStringAsync($"https://{summRegion}1.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summonerName}?api_key={apiKey}")));
                 JArray championMasterArray = JArray.Parse((await client.GetStringAsync($"https://{summRegion}1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/{summonerId}?api_key={apiKey}")));
