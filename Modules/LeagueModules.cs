@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using System.Data.SQLite;
 using System.Net.Http;
 using System.Collections.Generic;
+using ChampionData;
 
 namespace _02_commands_framework.Services
 {
