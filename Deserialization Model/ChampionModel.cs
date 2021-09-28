@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace ChampionData
 {
-    public class ChampionData
+    public class ChampionDataModel
     {
         [JsonProperty("type")]
         public string Type { get; set; }
@@ -18,6 +18,6 @@ namespace ChampionData
         public string Version { get; set; }
         
         [JsonProperty("data")]
-        public Dictionary<string, Champion> data;    
+        public Dictionary<string, Champion> Data { get; set; }
     }
 }

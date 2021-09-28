@@ -11,7 +11,8 @@
           "Discord.Net": "2.4.0",
           "Microsoft.Data.Sqlite": "5.0.10",
           "Microsoft.Extensions.DependencyInjection": "3.1.0",
-          "System.Data.SQLite": "1.0.115"
+          "System.Data.SQLite": "1.0.115",
+          "System.Text.Json": "5.0.2"
         },
         "runtime": {
           "Bloom.dll": {}
@@ -595,6 +596,14 @@
           "System.Runtime": "4.3.0"
         }
       },
+      "System.Text.Json/5.0.2": {
+        "runtime": {
+          "lib/netcoreapp3.0/System.Text.Json.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.521.16609"
+          }
+        }
+      },
       "System.Threading/4.3.0": {
         "dependencies": {
           "System.Runtime": "4.3.0",
@@ -638,42 +647,42 @@
     "Discord.Net/2.4.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-W8NtPnu2DxL0uxgwvQZr0P3i0lmOkMfjEzLJn6Ztwk9lFe6W2AAOdRyHXsO1qQZn4fzBoRIO7rrTPgzdcQsU9A==",
+      "sha512": "sha512-cP2GoFsvkMf7xruBiUZlIG4HWeUsMosU7qZg+3E0DeIoCEDQ/2N3fi49RX1LjS6CEdBb8s2IabD/OVP7QCEz3g==",
       "path": "discord.net/2.4.0",
       "hashPath": "discord.net.2.4.0.nupkg.sha512"
     },
     "Discord.Net.Commands/2.4.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-dTCzvP3MtAUyvmZHhgfK3vr8aK2XQob6HF7ALg0Gm6b98pFHthgNcHtKWkU8SljGPVR9ZtpgGb2qvw0F9eaiCQ==",
+      "sha512": "sha512-KqkqhTBh30ewHVBpGSq10KY0SWk5n0UWFYcxlYziExU+/0g8Ebu3iBGA21SHSvy27fsSUkmQmeUR4e/qs8ksHg==",
       "path": "discord.net.commands/2.4.0",
       "hashPath": "discord.net.commands.2.4.0.nupkg.sha512"
     },
     "Discord.Net.Core/2.4.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-sIGAuirj2uNXezTOJVxoKMKdF6/6pbwB8DdFS0/DiqaTJ0x826SXXcyVu4eZRUMZ5mv9d7KORy1/9HK2vMoSAg==",
+      "sha512": "sha512-3nRnZgXtwId/iXJqY/BmbFFOXf18TRExE3JYil6RaUEBEjFF9ufMbhTcE249W0rfTv6F2dzrNKa0yXS912a4Kw==",
       "path": "discord.net.core/2.4.0",
       "hashPath": "discord.net.core.2.4.0.nupkg.sha512"
     },
     "Discord.Net.Rest/2.4.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-CKl//gEEquySrS1f+Aud80Zz04NT7g4mKdIkDK4nTSZ1YMu6mI4Mx00qlI63w5Rkv3G7OQLgUUx30bC8iwymbw==",
+      "sha512": "sha512-dnC7yId1fPG+WNFKceQTvDB4ZUVP6eneDGpChrT0UXdAFQX18EuN0qVXcZWCDcVTev4ZG3VpN2QENa7TNrxQxA==",
       "path": "discord.net.rest/2.4.0",
       "hashPath": "discord.net.rest.2.4.0.nupkg.sha512"
     },
     "Discord.Net.Webhook/2.4.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-bPHl13SKzgld0ubARMgqTPowzmQnpNylMUN2DyaUgupva+SKBZQjsAbR0r8u1WjhT9zSOEoTfYT5rkMyHXa6qQ==",
+      "sha512": "sha512-ajQuZvhQMGzkUr1RmB18okjDDigxCmHBrlgGg51LcY87lik4XfWJdVl690AU9l1xl35UVQ/YF4vEDUduczT29w==",
       "path": "discord.net.webhook/2.4.0",
       "hashPath": "discord.net.webhook.2.4.0.nupkg.sha512"
     },
     "Discord.Net.WebSocket/2.4.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-YsoDEyQWHDBwmK9ImY3n18icsvgt8Bwfh3rfDZkKRRytxclJYzr1zfoY+cPVAcYuVRwoMi4ODWBGu+jTK++4QA==",
+      "sha512": "sha512-+cHZFW2H03sGP+0vm8WG+S0dnhWamHfm1Oa4aSW9q8kWXOUhI+3oytb7VuGD2kxNWR/R8Ow8OVl7yhUiWVqqRA==",
       "path": "discord.net.websocket/2.4.0",
       "hashPath": "discord.net.websocket.2.4.0.nupkg.sha512"
     },
@@ -1005,6 +1014,13 @@
       "sha512": "sha512-BiIg+KWaSDOITze6jGQynxg64naAPtqGHBwDrLaCtixsa5bKiR8dpPOHA7ge3C0JJQizJE+sfkz1wV+BAKAYZw==",
       "path": "system.text.encoding/4.3.0",
       "hashPath": "system.text.encoding.4.3.0.nupkg.sha512"
+    },
+    "System.Text.Json/5.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-I47dVIGiV6SfAyppphxqupertT/5oZkYLDCX6vC3HpOI4ZLjyoKAreUoem2ie6G0RbRuFrlqz/PcTQjfb2DOfQ==",
+      "path": "system.text.json/5.0.2",
+      "hashPath": "system.text.json.5.0.2.nupkg.sha512"
     },
     "System.Threading/4.3.0": {
       "type": "package",

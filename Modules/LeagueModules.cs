@@ -8,6 +8,8 @@ using System.Data.SQLite;
 using System.Net.Http;
 using System.Collections.Generic;
 using ChampionData;
+using System.Text.Json;
+
 
 namespace _02_commands_framework.Services
 {
@@ -211,7 +213,11 @@ namespace _02_commands_framework.Services
         {
             user = user ?? Context.User;
             JObject rotationString = JObject.Parse(await client.GetStringAsync($"https://euw1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key={apiKey}"));
+            string jsonString = File.ReadAllText("Data Dragon/champions.json");
+            ChampionDataModel dataDeserialized = JsonSerializer.Deserialize<ChampionDataModel>(jsonString);
 
+
+            Console.WriteLine(dataDeserialized.Data);
             var embed = new EmbedBuilder()
             {
                 Color = Color.Green,

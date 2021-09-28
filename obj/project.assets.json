@@ -735,6 +735,15 @@
           "ref/netstandard1.3/System.Text.Encoding.dll": {}
         }
       },
+      "System.Text.Json/5.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.0/System.Text.Json.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/System.Text.Json.dll": {}
+        }
+      },
       "System.Threading/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -781,21 +790,23 @@
   },
   "libraries": {
     "Discord.Net/2.4.0": {
-      "sha512": "W8NtPnu2DxL0uxgwvQZr0P3i0lmOkMfjEzLJn6Ztwk9lFe6W2AAOdRyHXsO1qQZn4fzBoRIO7rrTPgzdcQsU9A==",
+      "sha512": "cP2GoFsvkMf7xruBiUZlIG4HWeUsMosU7qZg+3E0DeIoCEDQ/2N3fi49RX1LjS6CEdBb8s2IabD/OVP7QCEz3g==",
       "type": "package",
       "path": "discord.net/2.4.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "discord.net.2.4.0.nupkg.sha512",
         "discord.net.nuspec"
       ]
     },
     "Discord.Net.Commands/2.4.0": {
-      "sha512": "dTCzvP3MtAUyvmZHhgfK3vr8aK2XQob6HF7ALg0Gm6b98pFHthgNcHtKWkU8SljGPVR9ZtpgGb2qvw0F9eaiCQ==",
+      "sha512": "KqkqhTBh30ewHVBpGSq10KY0SWk5n0UWFYcxlYziExU+/0g8Ebu3iBGA21SHSvy27fsSUkmQmeUR4e/qs8ksHg==",
       "type": "package",
       "path": "discord.net.commands/2.4.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "discord.net.commands.2.4.0.nupkg.sha512",
         "discord.net.commands.nuspec",
         "lib/net461/Discord.Net.Commands.dll",
@@ -807,11 +818,12 @@
       ]
     },
     "Discord.Net.Core/2.4.0": {
-      "sha512": "sIGAuirj2uNXezTOJVxoKMKdF6/6pbwB8DdFS0/DiqaTJ0x826SXXcyVu4eZRUMZ5mv9d7KORy1/9HK2vMoSAg==",
+      "sha512": "3nRnZgXtwId/iXJqY/BmbFFOXf18TRExE3JYil6RaUEBEjFF9ufMbhTcE249W0rfTv6F2dzrNKa0yXS912a4Kw==",
       "type": "package",
       "path": "discord.net.core/2.4.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "discord.net.core.2.4.0.nupkg.sha512",
         "discord.net.core.nuspec",
         "lib/net461/Discord.Net.Core.dll",
@@ -823,11 +835,12 @@
       ]
     },
     "Discord.Net.Rest/2.4.0": {
-      "sha512": "CKl//gEEquySrS1f+Aud80Zz04NT7g4mKdIkDK4nTSZ1YMu6mI4Mx00qlI63w5Rkv3G7OQLgUUx30bC8iwymbw==",
+      "sha512": "dnC7yId1fPG+WNFKceQTvDB4ZUVP6eneDGpChrT0UXdAFQX18EuN0qVXcZWCDcVTev4ZG3VpN2QENa7TNrxQxA==",
       "type": "package",
       "path": "discord.net.rest/2.4.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "discord.net.rest.2.4.0.nupkg.sha512",
         "discord.net.rest.nuspec",
         "lib/net461/Discord.Net.Rest.dll",
@@ -839,11 +852,12 @@
       ]
     },
     "Discord.Net.Webhook/2.4.0": {
-      "sha512": "bPHl13SKzgld0ubARMgqTPowzmQnpNylMUN2DyaUgupva+SKBZQjsAbR0r8u1WjhT9zSOEoTfYT5rkMyHXa6qQ==",
+      "sha512": "ajQuZvhQMGzkUr1RmB18okjDDigxCmHBrlgGg51LcY87lik4XfWJdVl690AU9l1xl35UVQ/YF4vEDUduczT29w==",
       "type": "package",
       "path": "discord.net.webhook/2.4.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "discord.net.webhook.2.4.0.nupkg.sha512",
         "discord.net.webhook.nuspec",
         "lib/netstandard2.0/Discord.Net.Webhook.dll",
@@ -853,11 +867,12 @@
       ]
     },
     "Discord.Net.WebSocket/2.4.0": {
-      "sha512": "YsoDEyQWHDBwmK9ImY3n18icsvgt8Bwfh3rfDZkKRRytxclJYzr1zfoY+cPVAcYuVRwoMi4ODWBGu+jTK++4QA==",
+      "sha512": "+cHZFW2H03sGP+0vm8WG+S0dnhWamHfm1Oa4aSW9q8kWXOUhI+3oytb7VuGD2kxNWR/R8Ow8OVl7yhUiWVqqRA==",
       "type": "package",
       "path": "discord.net.websocket/2.4.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "discord.net.websocket.2.4.0.nupkg.sha512",
         "discord.net.websocket.nuspec",
         "lib/net461/Discord.Net.WebSocket.dll",
@@ -2718,6 +2733,28 @@
         "system.text.encoding.nuspec"
       ]
     },
+    "System.Text.Json/5.0.2": {
+      "sha512": "I47dVIGiV6SfAyppphxqupertT/5oZkYLDCX6vC3HpOI4ZLjyoKAreUoem2ie6G0RbRuFrlqz/PcTQjfb2DOfQ==",
+      "type": "package",
+      "path": "system.text.json/5.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.Text.Json.dll",
+        "lib/net461/System.Text.Json.xml",
+        "lib/netcoreapp3.0/System.Text.Json.dll",
+        "lib/netcoreapp3.0/System.Text.Json.xml",
+        "lib/netstandard2.0/System.Text.Json.dll",
+        "lib/netstandard2.0/System.Text.Json.xml",
+        "system.text.json.5.0.2.nupkg.sha512",
+        "system.text.json.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "System.Threading/4.3.0": {
       "sha512": "VkUS0kOBcUf3Wwm0TSbrevDDZ6BlM+b/HRiapRFWjM5O0NS0LviG0glKmFK+hhPDd1XFeSdU1GmlLhb2CoVpIw==",
       "type": "package",
@@ -2884,23 +2921,24 @@
       "Discord.Net >= 2.4.0",
       "Microsoft.Data.Sqlite >= 5.0.10",
       "Microsoft.Extensions.DependencyInjection >= 3.1.0",
-      "System.Data.SQLite >= 1.0.115"
+      "System.Data.SQLite >= 1.0.115",
+      "System.Text.Json >= 5.0.2"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\user\\.nuget\\packages\\": {}
+    "C:\\Users\\tarka\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\C#\\Bloom\\Bloom.csproj",
+      "projectUniqueName": "C:\\Coding\\C#\\Bloom\\Bloom.csproj",
       "projectName": "Bloom",
-      "projectPath": "C:\\C#\\Bloom\\Bloom.csproj",
-      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\C#\\Bloom\\obj\\",
+      "projectPath": "C:\\Coding\\C#\\Bloom\\Bloom.csproj",
+      "packagesPath": "C:\\Users\\tarka\\.nuget\\packages\\",
+      "outputPath": "C:\\Coding\\C#\\Bloom\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\tarka\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2941,6 +2979,10 @@
           "System.Data.SQLite": {
             "target": "Package",
             "version": "[1.0.115, )"
+          },
+          "System.Text.Json": {
+            "target": "Package",
+            "version": "[5.0.2, )"
           }
         },
         "imports": [
@@ -2958,7 +3000,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.207\\RuntimeIdentifierGraph.json"
       }
     }
   }
