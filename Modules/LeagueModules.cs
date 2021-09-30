@@ -216,9 +216,8 @@ namespace _02_commands_framework.Services
             string jsonString = File.ReadAllText("Data Dragon/champions.json");
             ChampionDataModel dataDeserialized = JsonConvert.DeserializeObject<ChampionDataModel>(jsonString);
             
-
-
-            Console.WriteLine(dataDeserialized.Data["Ahri"].Name);
+            
+            
             var embed = new EmbedBuilder()
             {
                 Color = Color.Green,
@@ -228,8 +227,16 @@ namespace _02_commands_framework.Services
                         .WithText($"{user.Username}")
                         .WithIconUrl($"{user.GetAvatarUrl()}")
             };
-            embed.AddField("stuff", rotationString, true);
-
+            foreach (var element in dataDeserialized.Data)
+            {
+                for (int i = 0; i < 16; i++)
+                {
+                    if (dataDeserialized.Data[element.Key].Key == rotationString["freeChampionIds"][i].ToString())
+                    {
+                        embed.AddField($"Champion", element.Value.Name, true);
+                    }
+                }
+            }
             await ReplyAsync("", false, embed.Build());
         }
     }
