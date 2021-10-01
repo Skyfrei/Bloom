@@ -215,7 +215,8 @@ namespace _02_commands_framework.Services
             JObject rotationString = JObject.Parse(await client.GetStringAsync($"https://euw1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key={apiKey}"));
             string jsonString = File.ReadAllText("Data Dragon/champions.json");
             ChampionDataModel dataDeserialized = JsonConvert.DeserializeObject<ChampionDataModel>(jsonString);
-            
+            List<string> championRotationList = new List<string>();
+            string fullList = "";
             
             
             var embed = new EmbedBuilder()
@@ -231,13 +232,22 @@ namespace _02_commands_framework.Services
             {
                 for (int i = 0; i < 16; i++)
                 {
-                    if (dataDeserialized.Data[element.Key].Key == rotationString["freeChampionIds"][i].ToString())
+                    if (dataDeserialized.Data[element.Value.Id].Key == rotationString["freeChampionIds"][i].ToString())
                     {
-                        embed.AddField($"Champion", element.Value.Name, true);
+                        championRotationList.Add(element.Value.Name);
                     }
                 }
             }
+            for (int i = 0; i < championRotationList.Count; i++)
+            {
+                if (i == championRotationList.Count - 1)
+                    fullList += $"{championRotationList[i]}.";
+                else
+                    fullList += $"{championRotationList[i]}, ";
+            }
+            embed.AddField($"Champions", fullList, true);
             await ReplyAsync("", false, embed.Build());
+            
         }
     }
 }
