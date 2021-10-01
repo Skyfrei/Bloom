@@ -9,15 +9,31 @@ using System.Data.SQLite;
 using System.Net.Http;
 using System.Collections.Generic;
 using ChampionData;
+using System.Linq;
 
 
 namespace _02_commands_framework.Services
 {
+    public class ChampionMastery
+    {
+        public ChampionMastery(string points, string name, int level)
+        {
+            this.Points = points;
+            this.Name = name;
+            this.Level = level;
+        }
+        public string Points { get; set;}
+        public string Name { get; set; }
+        public int Level { get; set; }
+    }
+
     public class LeagueOfLegends : ModuleBase<SocketCommandContext>
     {
         private static readonly HttpClient client = new HttpClient();
         private readonly string apiKey = File.ReadAllText("Data Dragon/ApiToken.txt");
         JObject data = JObject.Parse(File.ReadAllText("Data Dragon/champions.json"));
+        private readonly static string jsonString = File.ReadAllText("Data Dragon/champions.json");
+        ChampionDataModel dataDeserialized = JsonConvert.DeserializeObject<ChampionDataModel>(jsonString);
 
         [Command("build")]
         [Alias("herobuild", "champbuild")]
@@ -169,13 +185,28 @@ namespace _02_commands_framework.Services
                 };
                 embed.AddField("Live Game", $"[Link](https://u.gg/lol/profile/{summRegion}1/{summonerName}/live-game)", true);
                 embed.AddField("Champion Stats", $"[Link](https://u.gg/lol/profile/{summRegion}1/{summonerName}/champion-stats)", true);
+                
 
-
+                List<ChampionMastery> listForPlayedChampions = new List<ChampionMastery>();
                 //Get champion names here !!!!!!!!!!!!!!!!!
-                foreach(JObject champ in championMastery)
+                foreach (var element in dataDeserialized.Data)
                 {
-                    embed.AddField("Played Champion", $"[Link](https://ddragon.leagueoflegends.com/cdn/11.19.1/img/champion/{summonerName}.png)", true);
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (dataDeserialized.Data[element.Key].Key == championMastery[i]["championId"].ToString())
+                        {
+                            ChampionMastery obj1 = new ChampionMastery(championMastery[i]["championPoints"].ToString(), element.Value.Name, Int16.Parse($"{championMastery[i]["championLevel"]}"));
+                            listForPlayedChampions.Add(obj1); 
+                        }
+                                  
+                    }
                 }
+                List<ChampionMastery> newList = listForPlayedChampions.OrderByDescending(o => o.Points).ToList();
+                foreach (var element in newList)
+                {
+                    embed.AddField($"{element.Name}", $"Level: {element.Level}: {element.Points}", false);
+                }
+                    
                 await ReplyAsync("", false, embed.Build());
             }
             catch (Exception e)
@@ -207,14 +238,13 @@ namespace _02_commands_framework.Services
         }
 
         //Gets weekly champion rotation when user enters !rotation
-        //Need to add multiple images here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         [Command("rotation")]
         public async Task ChampionRotation(IUser user = null)
         {
             user = user ?? Context.User;
             JObject rotationString = JObject.Parse(await client.GetStringAsync($"https://euw1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key={apiKey}"));
-            string jsonString = File.ReadAllText("Data Dragon/champions.json");
-            ChampionDataModel dataDeserialized = JsonConvert.DeserializeObject<ChampionDataModel>(jsonString);
+            
+            
             List<string> championRotationList = new List<string>();
             string fullList = "";
             
@@ -235,6 +265,7 @@ namespace _02_commands_framework.Services
                     if (dataDeserialized.Data[element.Value.Id].Key == rotationString["freeChampionIds"][i].ToString())
                     {
                         championRotationList.Add(element.Value.Name);
+                        continue;
                     }
                 }
             }
