@@ -24,7 +24,7 @@ Bloom is an ongoing project and has characteristic traits of a bot-slave. Bloom 
 
    ・Using the profile command for league of legends accounts (still under development, links of champions will be replaced with champion images and mastery points)
 
-![image](https://user-images.githubusercontent.com/47726384/135690575-9bce28e4-837f-4eba-9748-360a4dc1c5e2.png)
+![image](https://user-images.githubusercontent.com/47726384/135690575-9bce28e4-837f-4eba-9748-360a4dc1c5e2.png  | height=100)
 
    ・Using this command you can see all the current champions that are free to use
 
