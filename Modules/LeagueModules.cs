@@ -174,7 +174,7 @@ namespace _02_commands_framework.Services
                 var embed = new EmbedBuilder()
                 {
                     Color = Color.Orange,
-                    Title = summonerName,
+                    Title = $"{summonerName} - Level {responseString["summonerLevel"]}",
                     ThumbnailUrl = $"https://ddragon.leagueoflegends.com/cdn/11.19.1/img/profileicon/{responseString["profileIconId"]}.png",
                     Url = $"https://u.gg/lol/profile/{summRegion}1/{summonerName}",
                     
@@ -183,6 +183,22 @@ namespace _02_commands_framework.Services
                             .WithText($"{user.Username}")
                             .WithIconUrl($"{user.GetAvatarUrl()}")
                 };
+                JArray leagueRank = JArray.Parse((await client.GetStringAsync($"https://{summRegion}1.api.riotgames.com/lol/league/v4/entries/by-summoner/{summonerId}?api_key={apiKey}")));
+                if (leagueRank.Count != 0 )
+                {
+                    float wins = Int16.Parse(leagueRank[0]["wins"].ToString());
+                    int loses = Int16.Parse(leagueRank[0]["losses"].ToString());
+                    float winrate = wins/(wins + loses) * 100;
+                    string winrateFomat = winrate.ToString("N2");
+
+                    embed.AddField($"{leagueRank[0]["tier"]} {leagueRank[0]["rank"]}", $"Winrate: {winrateFomat}%", false);
+                }
+                
+                
+               
+                
+
+
                 embed.AddField("Live Game", $"[Link](https://u.gg/lol/profile/{summRegion}1/{summonerName}/live-game)", true);
                 embed.AddField("Champion Stats", $"[Link](https://u.gg/lol/profile/{summRegion}1/{summonerName}/champion-stats)", true);
                 
@@ -204,7 +220,7 @@ namespace _02_commands_framework.Services
                 List<ChampionMastery> newList = listForPlayedChampions.OrderByDescending(o => o.Points).ToList();
                 foreach (var element in newList)
                 {
-                    embed.AddField($"{element.Name}", $"Level: {element.Level}: {element.Points}", false);
+                    embed.AddField($"{element.Name}", $"Mastery {element.Level}: {String.Format("{0:n0}", Int64.Parse(element.Points))}", false);
                 }
                     
                 await ReplyAsync("", false, embed.Build());
@@ -278,7 +294,6 @@ namespace _02_commands_framework.Services
             }
             embed.AddField($"Champions", fullList, true);
             await ReplyAsync("", false, embed.Build());
-            
         }
     }
 }
