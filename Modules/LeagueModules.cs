@@ -161,7 +161,7 @@ namespace _02_commands_framework.Services
                     summRegion = reader["Region"].ToString();  
                     summonerId = reader["RiotId"].ToString();
                 }
-                if (summonerName == "" || summonerName == null ) throw new ArgumentException((await ReplyAsync("This user doesn't have an account. Type !register [accountName] [region] to create one `!register MaxxBurn euw`")).ToString());
+                if (summonerName == "" || summonerName == null ) throw new ArgumentException((await ReplyAsync("This user doesn't have an account. Type !register [accountName] [region] to create one `!register MaxxBurn euw`\n `!register \"Hers ùwú\" euw`")).ToString());
                 
                 JObject responseString = JObject.Parse((await client.GetStringAsync($"https://{summRegion}1.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summonerName}?api_key={apiKey}")));
                 JArray championMasterArray = JArray.Parse((await client.GetStringAsync($"https://{summRegion}1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/{summonerId}?api_key={apiKey}")));
@@ -193,15 +193,8 @@ namespace _02_commands_framework.Services
 
                     embed.AddField($"{leagueRank[0]["tier"]} {leagueRank[0]["rank"]}", $"Winrate: {winrateFomat}%", false);
                 }
-                
-                
-               
-                
-
-
                 embed.AddField("Live Game", $"[Link](https://u.gg/lol/profile/{summRegion}1/{summonerName}/live-game)", true);
                 embed.AddField("Champion Stats", $"[Link](https://u.gg/lol/profile/{summRegion}1/{summonerName}/champion-stats)", true);
-                
 
                 List<ChampionMastery> listForPlayedChampions = new List<ChampionMastery>();
                 //Get champion names here !!!!!!!!!!!!!!!!!
@@ -233,21 +226,36 @@ namespace _02_commands_framework.Services
 
         // Deleting the profile saved on the sqlite database
         [Command("deleteProfile")]
+        [Alias("delete")]
         public async Task DeleteProfile(IUser user = null)
         {
             user = user ?? Context.User;
+            string tempsummName = "";
 
             SQLiteConnection conn = new SQLiteConnection("Data Source= database.db; Version=3; New=True; Compress=True;");
             try
             {
                 conn.Open();
                 SQLiteCommand command = new SQLiteCommand();
+                
+                command = conn.CreateCommand();
+                
+                command.CommandText = $"SELECT Summ_name FROM Users WHERE Id = '{user.Id}'";
+                SQLiteDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    tempsummName = reader.GetString(0);
+                }
+                if (tempsummName == null || tempsummName == "") throw new ArgumentException((await ReplyAsync("You don't have an account registered.")).ToString());
+                
                 command = conn.CreateCommand();
                 command.CommandText = $"DELETE FROM Users WHERE Id = '{user.Id}'";
                 command.ExecuteNonQuery();
+                conn.Close();
+            
                 await ReplyAsync("Done");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e);
             }
