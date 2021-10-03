@@ -29,7 +29,7 @@ namespace _02_commands_framework.Services
 
     public class LeagueOfLegends : ModuleBase<SocketCommandContext>
     {
-        private static readonly HttpClient client = new HttpClient();
+        public static readonly HttpClient client = new HttpClient();
         private readonly string apiKey = File.ReadAllText("Data Dragon/ApiToken.txt");
         JObject data = JObject.Parse(File.ReadAllText("Data Dragon/champions.json"));
         private readonly static string jsonString = File.ReadAllText("Data Dragon/champions.json");
