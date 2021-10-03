@@ -39,7 +39,7 @@ namespace _02_commands_framework.Services
             JObject matchArray = JObject.Parse((await LeagueOfLegends.client.GetStringAsync($"https://{server}.api.riotgames.com/lor/ranked/v1/leaderboards?api_key={runeterraApiToken}")));
             List<LeaderBoardInfo> listOfPlayers = new List<LeaderBoardInfo>();
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 10; i++)
             {
                 LeaderBoardInfo playerObject = new LeaderBoardInfo(matchArray["players"][i]["name"].ToString(), Int32.Parse(matchArray["players"][i]["rank"].ToString()) + 1, Int32.Parse(matchArray["players"][i]["lp"].ToString()));
                 listOfPlayers.Add(playerObject);
