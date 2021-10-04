@@ -71,37 +71,37 @@ namespace _02_commands_framework.Services
             await ReplyAsync("", false, embed.Build());
         }
         
-        // [Command("Matches")]
-        // public async Task Inventory(IUser user = null)
-        // {
-        //     user = user ?? Context.User;
-        //     string server = "";
-        //     string puuid = "";
-        //     string leagueName = "";
+        [Command("Matches")]
+        public async Task Inventory(IUser user = null)
+        {
+            user = user ?? Context.User;
+            string server = "";
+            string puuid = "";
+            string leagueName = "";
             
-        //     SQLiteConnection conn = new SQLiteConnection("Data Source= database.db; Version=3; New=True; Compress=True;");
-        //     try
-        //     {
-        //         conn.Open();
-        //         SQLiteCommand command = new SQLiteCommand();
-        //         command = conn.CreateCommand();
-        //         command.CommandText = $"SELECT Summ_name, Region, Puuid FROM Users WHERE Id = '{user.Id}'";
+            SQLiteConnection conn = new SQLiteConnection("Data Source= database.db; Version=3; New=True; Compress=True;");
+            try
+            {
+                conn.Open();
+                SQLiteCommand command = new SQLiteCommand();
+                command = conn.CreateCommand();
+                command.CommandText = $"SELECT Summ_name, Region, Puuid FROM Users WHERE Id = '{user.Id}'";
 
-        //         SQLiteDataReader reader = command.ExecuteReader();
-        //         while(reader.Read())
-        //         {
-        //             leagueName = reader["Summ_name"].ToString();
-        //             server = reader["Region"].ToString();
-        //             puuid = reader["Puuid"].ToString();
-        //         }
-        //     }
-        //     catch(ArgumentException e)
-        //     {
+                SQLiteDataReader reader = command.ExecuteReader();
+                while(reader.Read())
+                {
+                    leagueName = reader["Summ_name"].ToString();
+                    server = reader["Region"].ToString();
+                    puuid = reader["Puuid"].ToString();
+                }
+            }
+            catch(ArgumentException e)
+            {
 
-        //     }
-        //     JArray userMatches = JArray.Parse((await LeagueOfLegends.client.GetStringAsync($"https://europe.api.riotgames.com/lor/match/v1/matches/by-puuid/{puuid}/ids?api_key={runeterraApiToken}")));
-        //     await ReplyAsync(userMatches[0].ToString());
-        // }
+            }
+            JArray userMatches = JArray.Parse((await LeagueOfLegends.client.GetStringAsync($"https://europe.api.riotgames.com/lor/match/v1/matches/by-puuid/{puuid}/ids?api_key={runeterraApiToken}")));
+            await ReplyAsync(userMatches[0].ToString());
+        }
     }
 
 }
