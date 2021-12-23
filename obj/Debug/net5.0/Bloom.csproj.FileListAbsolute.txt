@@ -17,7 +17,6 @@ C:\C#\Bloom\obj\Debug\net5.0\Bloom.GeneratedMSBuildEditorConfig.editorconfig
 C:\C#\Bloom\obj\Debug\net5.0\Bloom.AssemblyInfoInputs.cache
 C:\C#\Bloom\obj\Debug\net5.0\Bloom.AssemblyInfo.cs
 C:\C#\Bloom\obj\Debug\net5.0\Bloom.csproj.CoreCompileInputs.cache
-C:\C#\Bloom\obj\Debug\net5.0\Bloom.csproj.CopyComplete
 C:\C#\Bloom\obj\Debug\net5.0\Bloom.dll
 C:\C#\Bloom\obj\Debug\net5.0\ref\Bloom.dll
 C:\C#\Bloom\obj\Debug\net5.0\Bloom.pdb

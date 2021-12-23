@@ -20,7 +20,7 @@ namespace _02_commands_framework.Services
             _discord = services.GetRequiredService<DiscordSocketClient>();
             _services = services;
 
-            _discord.SetGameAsync("bdsm with my owner 😉");
+            _discord.SetGameAsync("fucking your mother 😉");
             
             _commands.CommandExecuted += CommandExecutedAsync;
             _discord.MessageReceived += MessageReceivedAsync;
